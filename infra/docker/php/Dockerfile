@@ -15,7 +15,7 @@ ENV TZ=UTC \
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-  apt-get -y install git libicu-dev libonig-dev libzip-dev unzip locales git && \
+  apt-get -y install git cron vim libicu-dev libonig-dev libzip-dev unzip locales git && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   locale-gen en_US.UTF-8 && \
@@ -28,5 +28,10 @@ RUN apt-get update && \
 
 COPY ./infra/docker/php/php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 COPY ./infra/docker/php/php.ini /usr/local/etc/php/php.ini
+
+# cron setting
+COPY ./infra/docker/php/cron.d /etc/cron.d
+RUN chmod -R 0644 /etc/cron.d
+CMD cron -f
 
 WORKDIR /work/backend
