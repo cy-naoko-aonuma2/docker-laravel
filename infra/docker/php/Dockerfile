@@ -34,4 +34,7 @@ COPY ./infra/docker/php/cron.d /etc/cron.d
 RUN chmod -R 0644 /etc/cron.d
 CMD cron -f
 
+# 起動しないので起動
+CMD php-fpm
+
 WORKDIR /work/backend
