@@ -25,6 +25,8 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/nginx/Dockerfile
+    depends_on:
+      - app
     ports:
       - ${WEB_PORT:-80}:80
     volumes:
