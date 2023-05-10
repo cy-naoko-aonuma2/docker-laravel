@@ -61,6 +61,10 @@ log-db:
 	docker-compose logs db
 log-db-watch:
 	docker-compose logs --follow db
+log-redis:
+	docker-compose logs redis
+log-redis-watch:
+	docker-compose logs --follow redis
 web:
 	docker-compose exec web ash
 app:
